@@ -17,6 +17,7 @@ import org.springframework.security.web.util.matcher.RequestMatcher;
 
 import com.wavesdev.oauth2.filter.CsrfFilter;
 import com.wavesdev.oauth2.util.JwtAuthenticationProvider;
+import com.wavesdev.oauth2.util.MyAuthenticationFailureHandler;
 import com.wavesdev.oauth2.util.MySuccessHandler;
 import com.wavesdev.oauth2.util.OAuth2AuthenticationEntryPoint;
 import com.wavesdev.oauth2.util.OAuth2AuthenticationFilter;
@@ -32,6 +33,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	 @Bean 
 	    public MySuccessHandler mySuccessHandler(){
 	    	return new MySuccessHandler();
+	    } 
+	 @Bean 
+	    public MyAuthenticationFailureHandler myAuthenticationFailureHandler(){
+	    	return new MyAuthenticationFailureHandler();
 	    } 
 	 @Bean 
 	 public OAuth2ServiceProperties oAuth2ServiceProperties(){
@@ -61,6 +66,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 			OAuth2AuthenticationFilter.setAuthenticationManager(authenticationManagerBean());
 			OAuth2AuthenticationFilter.setJwtKeyService(jwtKeyService);
 			OAuth2AuthenticationFilter.setAuthenticationSuccessHandler(mySuccessHandler());
+			OAuth2AuthenticationFilter.setAuthenticationFailureHandler(myAuthenticationFailureHandler());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

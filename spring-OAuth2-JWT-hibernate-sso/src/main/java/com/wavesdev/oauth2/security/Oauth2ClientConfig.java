@@ -41,7 +41,6 @@ public class Oauth2ClientConfig {
 	        resource.setAccessTokenUri(tokenUrl);
 	        resource.setClientId("trusted-app");
 	        resource.setClientSecret("secret");
-	        resource.setGrantType("password");
 	        resource.setScope(scopes);
 	        resource.setClientAuthenticationScheme(AuthenticationScheme.header);
             resource.setUserAuthorizationUri(authorizeUrl);

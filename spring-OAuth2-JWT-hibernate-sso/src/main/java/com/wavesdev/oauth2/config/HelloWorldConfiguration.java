@@ -21,7 +21,6 @@ import org.springframework.web.servlet.view.JstlView;
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = "com.wavesdev.oauth2")
-@EnableOAuth2Client
 @EnableTransactionManagement
 public class HelloWorldConfiguration {
 	@Bean
