@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.ImportResource;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.security.oauth2.client.DefaultOAuth2ClientContext;
 import org.springframework.security.oauth2.client.OAuth2ClientContext;
 import org.springframework.security.oauth2.client.OAuth2RestOperations;
@@ -18,18 +20,39 @@ import org.springframework.security.oauth2.client.token.grant.code.Authorization
 import org.springframework.security.oauth2.common.AuthenticationScheme;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableOAuth2Client;
 
+import com.wavesdev.oauth2.util.OAuth2ServiceProperties;
+
 @EnableOAuth2Client
 @Configuration
+@PropertySource("classpath:oauth2.properties")
 public class Oauth2ClientConfig {
-	    @Value("${oauth.resource:http://localhost:8080/spring-security-sso-auth-server/user/me}")
-	    private String baseUrl;
-	    @Value("${oauth.authorize:http://localhost:8080/spring-security-sso-auth-server/oauth/authorize}")
+	    @Value("${clientID}")
+	    private String clientID;
+	    @Value("${userAuthorizationUri}")
 	    private String authorizeUrl;
-	    @Value("${oauth.token:http://localhost:8080/spring-security-sso-auth-server/oauth/token}")
-	    private String tokenUrl;
+	    @Value("${accessTokenUri}")
+	    private String accessTokenUri;
+	    @Value("${clientSecret}")
+	    private String clientSecret;
+	    @Value("${redirectUri}")
+	    private String redirectUri;
+	    @Value("${JwtkeyUri}")
+	    private String JwtkeyUri;
 	    @Autowired
 	    private OAuth2ClientContext oauth2Context;
-	    
+	    @Bean 
+		 public OAuth2ServiceProperties oAuth2ServiceProperties(){
+			 
+			 OAuth2ServiceProperties oAuth2ServiceProperties=new OAuth2ServiceProperties();
+			 oAuth2ServiceProperties.setUserAuthorisationUri(authorizeUrl);
+			 oAuth2ServiceProperties.setRedirectUri(redirectUri);
+			 oAuth2ServiceProperties.setAccessTokenUri(accessTokenUri);
+			 oAuth2ServiceProperties.setClientId(clientID);
+			 oAuth2ServiceProperties.setClientSecret(clientSecret);
+			 oAuth2ServiceProperties.setJwtkeyUri(JwtkeyUri);
+		     return oAuth2ServiceProperties;
+		 
+		 }
 	    @Bean
 	    protected OAuth2ProtectedResourceDetails resource() {
 
@@ -38,7 +61,7 @@ public class Oauth2ClientConfig {
 	        List scopes = new ArrayList<String>(2);
 	        scopes.add("write");
 	        scopes.add("read");
-	        resource.setAccessTokenUri(tokenUrl);
+	        resource.setAccessTokenUri(accessTokenUri);
 	        resource.setClientId("trusted-app");
 	        resource.setClientSecret("secret");
 	        resource.setScope(scopes);

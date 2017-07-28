@@ -38,23 +38,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	    public MyAuthenticationFailureHandler myAuthenticationFailureHandler(){
 	    	return new MyAuthenticationFailureHandler();
 	    } 
-	 @Bean 
-	 public OAuth2ServiceProperties oAuth2ServiceProperties(){
-		 
-		 OAuth2ServiceProperties oAuth2ServiceProperties=new OAuth2ServiceProperties();
-		 oAuth2ServiceProperties.setUserAuthorisationUri("http://localhost:8080/spring-security-sso-auth-server/oauth/authorize");
-		 oAuth2ServiceProperties.setRedirectUri("http://localhost:8080/spring-OAuth2-JWT-hibernate-sso/login");
-		 oAuth2ServiceProperties.setAccessTokenUri("http://localhost:8080/spring-security-sso-auth-server/oauth/token");
-		 oAuth2ServiceProperties.setClientId("trusted-app");
-		 oAuth2ServiceProperties.setClientSecret("secret");
-		 oAuth2ServiceProperties.setJwtkeyUri("http://localhost:8080/spring-security-sso-auth-server/oauth/token_key");
-	     return oAuth2ServiceProperties;
-	 
-	 }
+	 @Autowired
+	 private OAuth2ServiceProperties oAuth2ServiceProperties;
+	
 	 @Bean
 	 public OAuth2AuthenticationEntryPoint oAuth2AuthenticationEntryPoint(){
 		 OAuth2AuthenticationEntryPoint oAuth2AuthenticationEntryPoint=new OAuth2AuthenticationEntryPoint();
-		 oAuth2AuthenticationEntryPoint.setoAuth2ServiceProperties(oAuth2ServiceProperties());
+		 oAuth2AuthenticationEntryPoint.setoAuth2ServiceProperties(oAuth2ServiceProperties);
 		 return oAuth2AuthenticationEntryPoint;
 	 }
 	 @Autowired
