@@ -1,4 +1,4 @@
-package com.wavesdev.oauth2.util;
+package com.wavesdev.oauth2.security;
 
 public class JwtKey {
 private String alg;

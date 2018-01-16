@@ -1,4 +1,4 @@
-package com.wavesdev.oauth2.util;
+package com.wavesdev.oauth2.security;
 
 import java.io.UnsupportedEncodingException;
 
@@ -10,8 +10,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.util.Assert;
 
-import com.wavesdev.oauth2.security.JwtKeyService;
+
 import com.wavesdev.oauth2.security.exceptions.JwtExpiredTokenException;
+import com.wavesdev.oauth2.service.JwtKeyService;
 
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.MalformedJwtException;

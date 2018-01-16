@@ -1,4 +1,4 @@
-package com.wavesdev.oauth2.util;
+package com.wavesdev.oauth2.security;
 
 import java.io.IOException;
 
@@ -20,8 +20,10 @@ import org.springframework.security.web.authentication.AbstractAuthenticationPro
 import org.springframework.security.web.util.matcher.RequestMatcher;
 import org.springframework.util.Assert;
 
+import com.wavesdev.oauth2.service.JwtKeyService;
 
-import com.wavesdev.oauth2.security.JwtKeyService;
+
+
 
 
 public class OAuth2AuthenticationFilter extends AbstractAuthenticationProcessingFilter implements InitializingBean {

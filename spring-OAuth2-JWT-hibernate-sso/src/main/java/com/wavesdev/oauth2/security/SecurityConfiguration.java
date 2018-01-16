@@ -15,13 +15,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 
-import com.wavesdev.oauth2.filter.CsrfFilter;
-import com.wavesdev.oauth2.util.JwtAuthenticationProvider;
-import com.wavesdev.oauth2.util.MyAuthenticationFailureHandler;
-import com.wavesdev.oauth2.util.MySuccessHandler;
-import com.wavesdev.oauth2.util.OAuth2AuthenticationEntryPoint;
-import com.wavesdev.oauth2.util.OAuth2AuthenticationFilter;
-import com.wavesdev.oauth2.util.OAuth2ServiceProperties;
+import com.wavesdev.oauth2.service.JwtKeyService;
+
 
 
 

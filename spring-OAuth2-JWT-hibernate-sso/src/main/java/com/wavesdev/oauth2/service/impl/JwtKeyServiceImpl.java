@@ -1,4 +1,4 @@
-package com.wavesdev.oauth2.security;
+package com.wavesdev.oauth2.service.impl;
 
 import java.util.Arrays;
 import java.util.LinkedHashMap;
@@ -14,10 +14,17 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import com.wavesdev.oauth2.util.JwtKey;
-import com.wavesdev.oauth2.util.OAuth2ServiceProperties;
-@Service
-public class JwtKeyService {
+import com.wavesdev.oauth2.security.JwtKey;
+import com.wavesdev.oauth2.security.OAuth2ServiceProperties;
+import com.wavesdev.oauth2.service.JwtKeyService;
+
+
+
+
+
+@Service("jwtKeyService")
+public class JwtKeyServiceImpl implements JwtKeyService {
+
 	@Autowired
 	private OAuth2ServiceProperties oAuth2ServiceProperties;
 	private HttpHeaders getHeadersWithClientCredentials() {
@@ -32,6 +39,7 @@ public class JwtKeyService {
 
 	
 	
+	@Override
 	public JwtKey getJwtKey() {
 		RestTemplate restTemplate = new RestTemplate();
 		JwtKey jwtKey = null;
@@ -50,6 +58,8 @@ public class JwtKeyService {
 		}
 		return jwtKey;
 	}
+
+	@Override
 	public String getAccessToken(Authentication authentication) {
 		String access_token=null;
 		try{
@@ -70,4 +80,5 @@ public class JwtKeyService {
 		}
 		return access_token;
 	}
+
 }

@@ -1,4 +1,4 @@
-package com.wavesdev.oauth2.util;
+package com.wavesdev.oauth2.security;
 
 import java.io.IOException;
 import java.util.Set;

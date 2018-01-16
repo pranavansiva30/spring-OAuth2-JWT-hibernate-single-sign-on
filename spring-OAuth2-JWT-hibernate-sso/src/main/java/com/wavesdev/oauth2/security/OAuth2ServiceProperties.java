@@ -1,4 +1,4 @@
-package com.wavesdev.oauth2.util;
+package com.wavesdev.oauth2.security;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.util.Assert;
